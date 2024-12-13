@@ -14,7 +14,7 @@ socketio = SocketIO(app)
 def index():
     if 'username' in session:
         return render_template('index.html')
-    return redirect(url_for('show_login'))
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

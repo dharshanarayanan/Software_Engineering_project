@@ -6,3 +6,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
+
+# Set up Flask-SocketIO
+socketio = SocketIO(app)

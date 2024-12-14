@@ -1,13 +1,183 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <title>Login</title>
-  </head>
-  <body>
-    <header>Login to your account</header>
-    <p>Enter your username and password</p>
-    <main></main>
-    <footer></footer>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer span {
+            color: #ff7e5f;
+            font-weight: 700;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Background animation */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            animation: move 15s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 20%;
+        }
+
+        .circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            bottom: 15%;
+            right: 10%;
+        }
+
+        .circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <div class="container">
+        <header>Login</header>
+        <p>Welcome back! Please login to continue.</p>
+
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+        <footer>&copy; 2024 <span>Login Portal</span>. All rights reserved.</footer>
+    </div>
+</body>
 </html>

@@ -19,6 +19,15 @@ def login():
 @app.route('/')
 def index():
     return render_template('index.html')
+def home():
+    print("Home route accessed")
+    return redirect('/welcome')
+
+@app.route('/welcome')
+def welcome():
+    print("Welcome route accessed")
+    return "Welcome to the Website!"
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

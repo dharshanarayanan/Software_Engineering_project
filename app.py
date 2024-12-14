@@ -10,7 +10,15 @@ app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 # Set up Flask-SocketIO
 socketio = SocketIO(app)
 
+@app.route('/index')
+def login():
+    if 'username' in session:
+        return render_template('login.html')
+    return redirect(url_for('login'))
+
 @app.route('/')
+def index():
+    return render_template('index.html')
 def home():
     print("Home route accessed")
     return redirect('/welcome')

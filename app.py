@@ -11,10 +11,15 @@ app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 socketio = SocketIO(app)
 
 @app.route('/')
-def index():
-    if 'username' in session:
-        return render_template('index.html')
-    return redirect(url_for('index'))
+def home():
+    print("Home route accessed")
+    return redirect('/welcome')
+
+@app.route('/welcome')
+def welcome():
+    print("Welcome route accessed")
+    return "Welcome to the Website!"
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

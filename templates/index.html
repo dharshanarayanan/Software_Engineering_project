@@ -166,6 +166,20 @@
                 transform: translateY(0);
             }
         }
+
+        /* Styling the login link button */
+        .login-button a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .login-button a:hover {
+            color: #ff7e5f;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -179,24 +193,38 @@
     <p>Access your designated role easily and securely:</p>
     <main>
         <label for="role-options">Choose Your Role:</label>
-            <select id="role-options">
-                <option value="admin" style="color:black;">Admin</option>
-                <option value="employee" style="color:black;">Employee</option>
-                <option value="vote" style="color:black;">Vote</option>
-            </select>
-            <a href="login.html" style="text-decoration: none;">
-                <button style="
-                    padding: 10px 20px;
-                    margin-top: 20px;
-                    font-size: 1rem;
-                    color: white;
-                    background: #4caf50;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                ">Go to Login</button>
-            </a>
-        </main>
+        <select id="role-options">
+            <option value="admin" style="color:black;">Admin</option>
+            <option value="employee" style="color:black;">Employee</option>
+            <option value="vote" style="color:black;">Vote</option>
+        </select>
+        <div class="login-button">
+            <button style="
+                padding: 12px 25px;
+                margin-top: 15px;
+                font-size: 1.05rem;
+                font-weight: bold;
+                background: linear-gradient(to right, #0f6901, #0b7901);
+                border: 2px solid #039f4c;
+                border-radius: 20px;
+                color: white;
+                cursor: pointer;
+                outline: none;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+                transition: all 0.3s ease;
+            ">
+                <a href="{{ url_for('login') }}" style="
+                    color: inherit;
+                    text-decoration: none;
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    line-height: 1.2;
+                ">Go to Login</a>
+            </button>
+        </div>        
+    </main>
     <footer>&copy; 2024 <span>Welcome Portal</span> | All rights reserved</footer>
 </body>
 </html>

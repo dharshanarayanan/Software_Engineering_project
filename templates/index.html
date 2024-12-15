@@ -10,7 +10,7 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: #333;
             display: flex;
             flex-direction: column;
@@ -21,25 +21,27 @@
             position: relative;
         }
         header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 3rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #fff;
-            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-bottom: 20px;
             animation: fadeInDown 1s ease;
         }
         header img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
         }
         p {
             font-size: 1.5rem;
-            margin: 20px 0;
             color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            text-align: center;
             animation: fadeInUp 1.5s ease;
         }
         main {
@@ -50,19 +52,17 @@
             animation: fadeIn 2s ease;
         }
         label {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #fff;
-            margin-bottom: 10px;
         }
         select {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 1.2rem;
             font-weight: bold;
-            text-transform: capitalize;
             color: #000;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -70,6 +70,32 @@
         select:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        .login-button {
+            margin-top: 20px;
+        }
+        .login-button button {
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #0e9e01, #0bb201);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-button button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .login-button button a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
         }
         footer {
             margin-top: 50px;
@@ -82,8 +108,7 @@
             color: #ff7e5f;
             font-weight: bold;
         }
-
-        /* Adding background elements */
+        /* Decorative floating elements */
         .circle {
             position: absolute;
             border-radius: 50%;
@@ -91,51 +116,56 @@
             animation: float 10s infinite, move 20s infinite;
         }
         .circle:nth-child(1) {
-            width: 200px;
-            height: 200px;
-            top: 10%;
-            left: 15%;
+            width: 180px;
+            height: 180px;
+            top: 8%;
+            left: 10%;
             animation-delay: 0s;
         }
         .circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            bottom: 15%;
-            right: 10%;
+            width: 130px;
+            height: 130px;
+            bottom: 10%;
+            right: 8%;
             animation-delay: 2s;
         }
         .circle:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            top: 60%;
-            left: 60%;
+            width: 220px;
+            height: 220px;
+            top: 65%;
+            left: 55%;
             animation-delay: 4s;
         }
-
-        @keyframes float {
-            0% {
+        @keyframes bounce {
+            0%, 100% {
                 transform: translateY(0);
             }
             50% {
                 transform: translateY(-20px);
             }
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
             100% {
                 transform: translateY(0);
             }
         }
-
         @keyframes move {
             0% {
                 transform: translateX(0);
             }
             50% {
-                transform: translateX(20px);
+                transform: translateX(15px);
             }
             100% {
                 transform: translateX(0);
             }
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -144,7 +174,6 @@
                 opacity: 1;
             }
         }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -155,7 +184,6 @@
                 transform: translateY(0);
             }
         }
-
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -166,20 +194,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Styling the login link button */
-        .login-button a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        .login-button a:hover {
-            color: #ff7e5f;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
@@ -188,40 +202,19 @@
     <div class="circle"></div>
     <header>
         <img src="logo.png" alt="Logo">
-        Welcome Portal
+        <h1>Welcome Portal</h1>
     </header>
     <p>Access your designated role easily and securely:</p>
     <main>
         <label for="role-options">Choose Your Role:</label>
         <select id="role-options">
-            <option value="admin" style="color:black;">Admin</option>
-            <option value="employee" style="color:black;">Employee</option>
-            <option value="vote" style="color:black;">Vote</option>
+            <option value="admin">Admin</option>
+            <option value="employee">Employee</option>
+            <option value="voter">Voter</option>
         </select>
         <div class="login-button">
-            <button style="
-                padding: 12px 25px;
-                margin-top: 15px;
-                font-size: 1.05rem;
-                font-weight: bold;
-                background: linear-gradient(to right, #0f6901, #0b7901);
-                border: 2px solid #039f4c;
-                border-radius: 20px;
-                color: white;
-                cursor: pointer;
-                outline: none;
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-                transition: all 0.3s ease;
-            ">
-                <a href="{{ url_for('login') }}" style="
-                    color: inherit;
-                    text-decoration: none;
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    text-align: center;
-                    line-height: 1.2;
-                ">Go to Login</a>
+            <button>
+                <a href="/login">Go to Login</a>
             </button>
         </div>        
     </main>

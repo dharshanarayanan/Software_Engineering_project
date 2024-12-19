@@ -6,12 +6,14 @@
     <title>Welcome Portal</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: #333;
+            background: radial-gradient(circle, #6a11cb, #2575fc);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,205 +21,174 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-        }
-        header {
             text-align: center;
-            margin-bottom: 20px;
+        }
+
+        /* Header */
+        header {
             animation: fadeInDown 1s ease;
+            margin-bottom: 50px;
+            position: relative;
         }
+
         header img {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 15px;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 30px;
             animation: bounce 2s infinite;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
         }
+
         header h1 {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             font-weight: bold;
             color: #fff;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-        p {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
             margin-bottom: 30px;
-            text-align: center;
-            animation: fadeInUp 1.5s ease;
+            animation: fadeInUp 2s ease;
         }
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+
+        /* Call-to-Action */
+        .cta-container {
+            margin-top: 20px;
             animation: fadeIn 2s ease;
         }
-        label {
-            font-size: 1.3rem;
+
+        .cta-button {
+            padding: 18px 30px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #43e97b, #38f9d7);
+            border: none;
+            border-radius: 50px;
             color: #fff;
-        }
-        select {
-            padding: 12px 25px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #000;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        select:hover {
+
+        .cta-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
-        .login-button {
-            margin-top: 20px;
-        }
-        .login-button button {
-            padding: 10px 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            background: linear-gradient(to right, #0e9e01, #0bb201);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            outline: none;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .login-button button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
-        .login-button button a {
+
+        .cta-button a {
             color: inherit;
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
         }
-        footer {
-            margin-top: 50px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            animation: fadeInUp 2.5s ease;
-        }
-        footer span {
-            color: #ff7e5f;
-            font-weight: bold;
-        }
-        /* Decorative floating elements */
+
+        /* Floating Circles */
         .circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 10s infinite, move 20s infinite;
+            background: rgba(255, 255, 255, 0.15);
+            animation: float 12s infinite, move 25s infinite;
         }
         .circle:nth-child(1) {
-            width: 180px;
-            height: 180px;
-            top: 8%;
-            left: 10%;
+            width: 250px;
+            height: 250px;
+            top: 5%;
+            left: 15%;
             animation-delay: 0s;
         }
         .circle:nth-child(2) {
-            width: 130px;
-            height: 130px;
+            width: 200px;
+            height: 200px;
             bottom: 10%;
-            right: 8%;
+            right: 10%;
             animation-delay: 2s;
         }
         .circle:nth-child(3) {
-            width: 220px;
-            height: 220px;
-            top: 65%;
-            left: 55%;
+            width: 300px;
+            height: 300px;
+            top: 70%;
+            left: 60%;
             animation-delay: 4s;
         }
+        .circle:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 25%;
+            animation-delay: 6s;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            animation: fadeInUp 2.5s ease;
+        }
+
+        footer span {
+            color: #43e97b;
+            font-weight: bold;
+        }
+
+        /* Animations */
         @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
+
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+            100% { transform: translateY(0); }
         }
+
         @keyframes move {
-            0% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(15px);
-            }
-            100% {
-                transform: translateX(0);
-            }
+            0% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
         }
+
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+
+    <!-- Floating Circles -->
     <div class="circle"></div>
     <div class="circle"></div>
     <div class="circle"></div>
+    <div class="circle"></div>
+
+    <!-- Main Content -->
     <header>
         <img src="logo.png" alt="Logo">
         <h1>Welcome Portal</h1>
     </header>
-    <p>Access your designated role easily and securely:</p>
-    <main>
-        <label for="role-options">Choose Your Role:</label>
-        <select id="role-options">
-            <option value="admin">Admin</option>
-            <option value="employee">Employee</option>
-            <option value="voter">Voter</option>
-        </select>
-        <div class="login-button">
-            <button>
-                <a href="/login">Go to Login</a>
-            </button>
-        </div>        
-    </main>
-    <footer>&copy; 2024 <span>Welcome Portal</span> | All rights reserved</footer>
+    <p style="font-size: 1.6rem; margin-bottom: 40px;">Your seamless access to our platform begins here:</p>
+
+    <div class="cta-container">
+        <button class="cta-button">
+            <a href="/login">Enter Now</a>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 <span>Welcome Portal</span> | All rights reserved
+    </footer>
 </body>
 </html>

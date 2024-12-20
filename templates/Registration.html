@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Interactive Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff6a00, #ee0979);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            background: #fff;
+            width: 400px; /* Adjusted for medium size */
+            padding: 50px 60px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.8s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .input-container {
+            position: relative;
+            margin: 25px 0;
+        }
+
+        .input-container input,
+        .input-container select {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .input-container select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #f8f8f8;
+            padding-right: 30px;
+        }
+
+        .input-container input:focus,
+        .input-container select:focus {
+            border-color: #ff6a00;
+            background-color: #fff;
+            box-shadow: 0 0 8px rgba(255, 106, 0, 0.6);
+        }
+
+        .input-container input:focus + label,
+        .input-container select:focus + label,
+        .input-container input:not(:placeholder-shown) + label,
+        .input-container select:not(:placeholder-shown) + label {
+            top: -18px;
+            left: 10px;
+            font-size: 12px;
+            color: #ff6a00;
+        }
+
+        .input-container label {
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            font-size: 16px;
+            color: #333;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* Custom Select Dropdown */
+        .select-arrow {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #999;
+        }
+
+        .input-container select {
+            padding-right: 40px;
+        }
+
+        /* Buttons */
+        .submit-btn, .fingerprint-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .submit-btn {
+            background: #ff6a00;
+        }
+
+        .submit-btn:hover {
+            background: #cc5600;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .fingerprint-btn {
+            background: #4c6ef5;
+        }
+
+        .fingerprint-btn:hover {
+            background: #3a59d1;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .fingerprint-btn::after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #fff;
+            transition: width 0.4s ease;
+        }
+
+        .fingerprint-btn:active::after {
+            width: 100%;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .error-message.visible {
+            opacity: 1;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 14px;
+            color: #4c6ef5;
+            text-decoration: underline;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Advanced Interactive Registration Form</h2>
+
+        <form id="registrationForm">
+            <!-- Full Name -->
+            <div class="input-container">
+                <input type="text" id="name" name="name" required placeholder=" ">
+                <label for="name">Full Name</label>
+                <div id="nameError" class="error-message">Please enter your name</div>
+            </div>
+
+            <!-- College ID -->
+            <div class="input-container">
+                <input type="text" id="collegeId" name="collegeId" required placeholder=" ">
+                <label for="collegeId">College ID</label>
+                <div id="collegeIdError" class="error-message">Please enter a valid college ID</div>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="input-container">
+                <input type="date" id="dob" name="dob" required>
+                <label for="dob">Date of Birth</label>
+            </div>
+
+            <!-- Gender -->
+            <div class="input-container">
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="gender">Gender</label>
+                <div id="genderError" class="error-message">Please select your gender</div>
+            </div>
+
+            <!-- Email -->
+            <div class="input-container">
+                <input type="email" id="email" name="email" required placeholder=" ">
+                <label for="email">Email Address</label>
+                <div id="emailError" class="error-message">Please enter a valid email</div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="input-container">
+                <input type="tel" id="phone" name="phone" required placeholder=" " pattern="[0-9]{10}">
+                <label for="phone">Phone Number</label>
+                <div id="phoneError" class="error-message">Please enter a valid phone number</div>
+            </div>
+
+            <!-- Fingerprint Registration -->
+            <button type="button" class="fingerprint-btn" onclick="openFingerprintScanner()">Register Fingerprint</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Open fingerprint scanner simulation
+        function openFingerprintScanner() {
+            alert("Please place your finger on the scanner to register.");
+            // You can add actual fingerprint scanner integration here
+        }
+
+        // Form Validation (for simplicity)
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Registration Successful!");
+        });
+
+        // Real-time Input Validation
+        document.getElementById("name").addEventListener("input", function() {
+            toggleErrorMessage(this, "nameError");
+        });
+
+        document.getElementById("collegeId").addEventListener("input", function() {
+            toggleErrorMessage(this, "collegeIdError");
+        });
+
+        document.getElementById("email").addEventListener("input", function() {
+            toggleErrorMessage(this, "emailError", /^[^ ]+@[^ ]+\.[a-z]{2,3}$/);
+        });
+
+        document.getElementById("phone").addEventListener("input", function() {
+            toggleErrorMessage(this, "phoneError", /^[0-9]{10}$/);
+        });
+
+        document.getElementById("gender").addEventListener("change", function() {
+            toggleErrorMessage(this, "genderError");
+        });
+
+        // Toggle error message visibility
+        function toggleErrorMessage(input, errorId, regex) {
+            const errorElement = document.getElementById(errorId);
+            if (!input.value || (regex && !regex.test(input.value))) {
+                errorElement.classList.add("visible");
+            } else {
+                errorElement.classList.remove("visible");
+            }
+        }
+    </script>
+
+</body>
+</html>

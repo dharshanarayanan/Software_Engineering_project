@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff99cc, #ffccff, #b3b3cc); /* New vibrant gradient */
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+            transition: all 0.5s ease-in-out;
+            position: relative;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        .sidebar .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #FFF;
+        }
+
+        .sidebar .profile-info img {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+            border: 2px solid #fff;
+        }
+
+        .sidebar .profile-info h3 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .sidebar .profile-info p {
+            font-size: 14px;
+        }
+
+        /* Date and Time Styles */
+        .sidebar .time-info {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .sidebar .time-info p {
+            font-size: 12px; /* Smaller font size for Date and Time */
+        }
+
+        /* Main Content Area */
+        .main-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            margin-left: 270px; /* Leave space for sidebar */
+            padding-top: 120px; /* Move content further down */
+        }
+
+        /* Header Styling */
+        .dashboard-header {
+            font-size: 36px;
+            color: #FFF;
+            text-align: center;
+            margin-top: 100px; /* Further down */
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            animation: slideIn 1s ease-out;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adding shadow to the title */
+            position: absolute;
+            top: 100px; /* Adjust to a new position */
+            width: 100%;
+        }
+
+        /* Button Container */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            margin-left: 20px; /* Move buttons slightly to the right */
+        }
+
+        /* Button Styles */
+        .btn {
+            background: linear-gradient(45deg, #6C63FF, #FF4B2B); /* Gradient button */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            width: 250px;
+            margin: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #FF4B2B, #6C63FF); /* Hover effect gradient */
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Wave Effect */
+        .wave {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: waveAnimation 4s ease-in-out infinite;
+        }
+
+        @keyframes waveAnimation {
+            0% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+            50% { transform: translateX(-50%) translateY(-30px); opacity: 0.7; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+        }
+
+        /* Animation for Title */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-info">
+            <img src="https://via.placeholder.com/70" alt="Employee Picture">
+            <h3>John Doe</h3>
+            <p>Employee ID: E123456</p>
+        </div>
+
+        <!-- Date and Time below Employee ID -->
+        <div class="time-info">
+            <p id="currentDate">Date: </p>
+            <p id="currentTime">Time: </p>
+        </div>
+
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Employee Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="dashboard-header">Welcome to Your Employee Dashboard</h1>
+
+        <!-- Registration Buttons -->
+        <div class="btn-container">
+            <button class="btn" onclick="window.location.href='new_registration.html'">New Registration</button>
+            <button class="btn" onclick="window.location.href='existing_registration.html'">Existing Registration</button>
+        </div>
+
+        <!-- Wave Animation -->
+        <div class="wave"></div>
+    </div>
+
+    <script>
+        // Display current date and time on the page
+        function updateDateTime() {
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString();
+            const formattedTime = currentDate.toLocaleTimeString();
+            document.getElementById('currentDate').textContent = `Date: ${formattedDate}`;
+            document.getElementById('currentTime').textContent = `Time: ${formattedTime}`;
+        }
+
+        setInterval(updateDateTime, 1000);
+    </script>
+
+</body>
+</html>

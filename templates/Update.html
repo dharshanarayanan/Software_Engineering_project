@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email and Fingerprint Verification</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6f61, #ffcc5c, #6b5b95, #feb47b);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.5s ease-in-out;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="checkbox"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #ff6f61;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 126, 95, 0.7);
+        }
+
+        .button {
+            background-color: #ff6f61;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #feb47b;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .verification-container {
+            text-align: center;
+        }
+
+        .fingerprint-container {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out;
+            text-align: center;
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .verification-message {
+            font-size: 1.2rem;
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        .success-message {
+            font-size: 1.2rem;
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+
+        .update-form {
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .update-form input,
+        .update-form select {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Email and Fingerprint Verification Form -->
+        <div id="verificationForm" class="verification-container">
+            <h2>Email and Fingerprint Verification</h2>
+            <form>
+                <label for="email">Email Address</label>
+                <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+                <button type="button" class="button" id="sendCodeBtn">Send Verification Code</button>
+
+                <label for="verificationCode">Enter Verification Code</label>
+                <input type="text" id="verificationCode" name="verificationCode" placeholder="Enter the code sent to your email" required>
+
+                <button type="button" class="button" id="verifyBtn">Verify Email</button>
+
+                <div class="verification-message" id="verificationMessage">Verification Successful! You can now proceed to the next step.</div>
+                <div class="error-message" id="errorMessage">Please provide a valid email and correct verification code.</div>
+
+                <!-- Fingerprint scanner -->
+                <div class="fingerprint-container">
+                    <label for="fingerprint">Fingerprint Scanner</label><br>
+                    <input type="checkbox" id="fingerprint" name="fingerprint" class="pulse">
+                    <label for="fingerprint">I have scanned my fingerprint</label>
+
+                    <button type="button" class="button" id="fingerprintVerifyBtn">Verify Fingerprint</button>
+
+                    <div class="verification-message" id="fingerprintSuccessMessage">Fingerprint verified! You can now update your details.</div>
+                    <div class="error-message" id="fingerprintErrorMessage">Please scan your fingerprint.</div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registration Update Form -->
+        <div id="updateForm" class="hidden update-form">
+            <h2>Update Registration Form</h2>
+            <form>
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="number" id="phone" name="phone" required>
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <button type="submit" class="button">Update</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Simulating the email verification process
+        document.getElementById('sendCodeBtn').addEventListener('click', function() {
+            var email = document.getElementById('email').value;
+            if (email) {
+                alert('Verification code sent to: ' + email);
+                document.getElementById('verificationCode').disabled = false;
+            }
+        });
+
+        // Verify email with code
+        document.getElementById('verifyBtn').addEventListener('click', function() {
+            var verificationCode = document.getElementById('verificationCode').value;
+            if (verificationCode === '1234') {  // Simulating a correct code
+                document.getElementById('verificationMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+                document.getElementById('verificationForm').classList.add('hidden');
+                document.getElementById('fingerprintForm').classList.remove('hidden');
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('verificationMessage').style.display = 'none';
+            }
+        });
+
+        // Simulating fingerprint verification
+        document.getElementById('fingerprintVerifyBtn').addEventListener('click', function() {
+            var fingerprint = document.getElementById('fingerprint').checked;
+            if (fingerprint) {
+                document.getElementById('fingerprintSuccessMessage').style.display = 'block';
+                document.getElementById('fingerprintErrorMessage').style.display = 'none';
+                document.getElementById('fingerprintForm').classList.add('hidden');
+                document.getElementById('updateForm').classList.remove('hidden');
+            } else {
+                document.getElementById('fingerprintErrorMessage').style.display = 'block';
+                document.getElementById('fingerprintSuccessMessage').style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>

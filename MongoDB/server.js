@@ -13,7 +13,7 @@ app.use(cors()); // Allow cross-origin requests
 
 // MongoDB Atlas Connection
 mongoose.connect(
-  'mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>?retryWrites=true&w=majority',
+  "mongodb+srv://NirmalVignesh:Nirmal@Cluster0.mongodb.net/voter_database?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 ).then(() => {
   console.log('Connected to MongoDB Atlas');

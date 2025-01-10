@@ -11,9 +11,9 @@ app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 socketio = SocketIO(app)
 
 # MongoDB connection setup
-client = MongoClient("mongodb+srv://Nirmal:<db_password>@cluster0.8k2qq.mongodb.net/")
-db = client.get_database('user_db')  # Replace 'user_db' with your database name
-users_collection = db.users  # Replace 'users' with your collection name
+##client = MongoClient("mongodb+srv://Nirmal:<db_password>@cluster0.8k2qq.mongodb.net/")
+#db = client.get_database('user_db')  # Replace 'user_db' with your database name
+#users_collection = db.users  # Replace 'users' with your collection name
 
 @app.route('/')
 def index():

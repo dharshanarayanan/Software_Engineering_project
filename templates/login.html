@@ -143,82 +143,10 @@
             background-color: #c0392b;
         }
 
-        /* Circle Animation */
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            animation: moveCircle 10s infinite;
-        }
-
-        .circle:nth-child(1) {
-            width: 150px;
-            height: 150px;
-            top: 10%;
-            left: 10%;
-            animation-duration: 12s;
-        }
-
-        .circle:nth-child(2) {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            left: 50%;
-            animation-duration: 8s;
-        }
-
-        .circle:nth-child(3) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            left: 30%;
-            animation-duration: 14s;
-        }
-
-        .circle:nth-child(4) {
-            width: 120px;
-            height: 120px;
-            top: 40%;
-            left: 70%;
-            animation-duration: 16s;
-        }
-
-        .circle:nth-child(5) {
-            width: 180px;
-            height: 180px;
-            top: 80%;
-            left: 20%;
-            animation-duration: 18s;
-        }
-
-        @keyframes moveCircle {
-            0% {
-                transform: translate(0, 0);
-            }
-            25% {
-                transform: translate(100px, 100px);
-            }
-            50% {
-                transform: translate(0, 200px);
-            }
-            75% {
-                transform: translate(-100px, -100px);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-
-    <!-- Circles for decoration -->
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
 
     <!-- Role selection page -->
     <div id="role-selection" class="container">
@@ -244,12 +172,12 @@
     <div id="login-form" class="container hidden">
         <header id="role-header">Login</header>
         <p id="welcome-message"></p>
-        <form>
+        <form id="login-form-content">
             <label for="username">Username</label>
-            <input type="text" id="username :" placeholder="Enter your username" required>
+            <input type="text" id="username" placeholder="Enter your username" required>
 
             <label for="password">Password</label>
-            <input type="password" id="password :" placeholder="Enter your password" required>
+            <input type="password" id="password" placeholder="Enter your password" required>
 
             <button type="submit">Login</button>
         </form>
@@ -257,20 +185,8 @@
     </div>
 
     <script>
-        // Background color change every 5 seconds
-        const backgrounds = [
-            'linear-gradient(to right, #6a11cb, #2575fc)',
-            'linear-gradient(to right, #1c92d2, #f2fcfe)',
-            'linear-gradient(to right, #56ab2f, #a8e063)',
-            'linear-gradient(to right, #8e44ad, #c0392b)'
-        ];
-
-        let currentBackgroundIndex = 0;
-
-        setInterval(() => {
-            currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
-            document.body.style.background = backgrounds[currentBackgroundIndex];
-        }, 5000);
+        // Stop background color change when logged in
+        let backgroundInterval;
 
         // Navigate to the login form for the selected role
         function navigateToRole(role) {
@@ -290,6 +206,9 @@
             // Hide the role selection and show login form
             document.getElementById('role-selection').classList.add('hidden');
             document.getElementById('login-form').classList.remove('hidden');
+
+            // Stop background color change
+            clearInterval(backgroundInterval);
         }
 
         // Go back to the role selection page
@@ -300,12 +219,49 @@
             // Hide login form and show role selection page
             document.getElementById('role-selection').classList.remove('hidden');
             document.getElementById('login-form').classList.add('hidden');
+
+            // Start background color change
+            startBackgroundChange();
         }
 
         // Capitalize the first letter of a string
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
+
+        // Start background color change every 5 seconds
+        function startBackgroundChange() {
+            const backgrounds = [
+                'linear-gradient(to right, #6a11cb, #2575fc)',
+                'linear-gradient(to right, #1c92d2, #f2fcfe)',
+                'linear-gradient(to right, #56ab2f, #a8e063)',
+                'linear-gradient(to right, #8e44ad, #c0392b)'
+            ];
+
+            let currentBackgroundIndex = 0;
+
+            backgroundInterval = setInterval(() => {
+                currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+                document.body.style.background = backgrounds[currentBackgroundIndex];
+            }, 5000);
+        }
+
+        // Handle form submission
+        document.getElementById('login-form-content').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const role = document.getElementById('role-header').innerText.split(' ')[0].toLowerCase();
+
+            if (role === 'admin') {
+                window.location.href = 'dashboard.html';
+            } else if (role === 'employee') {
+                window.location.href = 'Employee.html';
+            } else if (role === 'voter') {
+                window.location.href = 'Voter.html';
+            }
+        });
+
+        // Start the background change when the page loads
+        startBackgroundChange();
     </script>
 </body>
 </html>

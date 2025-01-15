@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Dashboard - Secure Voting</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #87CEEB, #4682B4); /* Sky Blue Gradient */
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Translucent white background */
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 450px; /* Reduced width for login card */
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .header h1 {
+            font-size: 2.5rem; /* Smaller font size */
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .header p {
+            font-size: 1rem; /* Smaller text */
+            color: #E0FFFF; /* Light cyan */
+            margin-bottom: 20px;
+        }
+        .voting-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Reduced gap between options */
+            margin-top: 20px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInOptions 1s forwards;
+        }
+        .option {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            width: 200px; /* Reduced size */
+            text-align: center;
+            transition: transform 0.4s, background 0.4s, box-shadow 0.3s;
+            animation: popInOption 1s ease-in-out;
+            color: #fff;
+        }
+        .option img {
+            width: 100%;
+            max-width: 160px;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+        .option:hover {
+            transform: scale(1.05) translateY(-5px); /* Smaller hover effect */
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #E0FFFF;
+        }
+        @keyframes fadeInOptions {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes popInOption {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Voter Dashboard -->
+        <div class="card">
+            <div class="header">
+                <h1>Voter Dashboard</h1>
+                <p>Select Your Voting Method</p>
+            </div>
+            <div class="voting-options">
+                <!-- Link to Fingerprint.html -->
+                <a href="Fingerprint.html" class="option">
+                    <img src="https://www.pngwing.com/en/free-png-pxrnx" alt="Fingerprint Scanner">
+                    <p>Fingerprint Scanner</p>
+                </a>
+                <!-- Link to Cardscanner.html -->
+                <a href="Cardscanner.html" class="option">
+                    <img src="https://images.unsplash.com/photo-1597170673180-7a945c8dbf32?auto=format&fit=crop&w=200&h=200" alt="Card Scanner">
+                    <p>Smart Card Scanner</p>
+                </a>
+            </div>
+            <div class="footer">
+                <p>&copy; 2025 Secure Voting System</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

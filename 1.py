@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 from pymongo import MongoClient
 
-uri = "mongodb+srv://dharshan:saymyname@cluster0.hh0vx.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://dharshan:whatsmyname@cluster0.hh0vx.mongodb.net/?retryWrites=true&w=majority"
 
 client = MongoClient(uri)
 try:

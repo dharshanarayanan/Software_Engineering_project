@@ -11,7 +11,7 @@ app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 socketio = SocketIO(app)
 
 # MongoDB connection setup
-client = MongoClient("mongodb+srv://dharshan:whatsmyname@cluster0.hh0vx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client = MongoClient("mongodb+srv://dharshan:saymyname@cluster0.hh0vx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client.get_database('voting_system')  # Replace 'user_db' with your database name
 users_collection = db.login  # Replace 'users' with your collection name
 
@@ -22,19 +22,6 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-
-        # Find the user in the MongoDB collection
-        user = users_collection.find_one({"username": username})
-        if user and user['password'] == password:
-            session['username'] = username
-            return redirect(url_for('welcome'))
-        else:
-            flash("Invalid username or password", "error")
-            return redirect(url_for('login'))
-
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -54,7 +41,7 @@ def register():
         flash("Registration successful! You can now log in.", "success")
         return redirect(url_for('login'))
 
-    return render_template('register.html')
+    return render_template('Registration.html')
 
 @app.route('/welcome')
 def welcome():

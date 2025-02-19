@@ -380,6 +380,17 @@
 
             return valid;
         }
+
+        function submitForm() {
+            const termsAccepted = document.getElementById('terms').checked;
+
+            if (termsAccepted) {
+                alert("Form submitted successfully!");
+                window.location.href = "Employee.html"; // Redirect to Employee.html
+            } else {
+                alert("Please accept the Terms and Conditions to proceed.");
+            }
+        }
     </script>
 
 </body>

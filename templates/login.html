@@ -11,13 +11,13 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: #fff;
-            transition: background 0.5s ease;
+            background-color: rgba(0, 0, 50, 0.5); /* Dark blue background with transparency */
+            backdrop-filter: blur(12px); /* Apply blur effect */
             overflow: hidden;
             position: relative;
         }
@@ -30,6 +30,7 @@
             text-align: center;
             width: 350px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 10;
         }
 
         header {
@@ -65,11 +66,6 @@
             transform: scale(1.05);
             background: linear-gradient(to right, #feb47b, #ff7e5f);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .role-button i {
-            font-size: 1.5rem;
-            color: #fff;
         }
 
         .role-button.admin {
@@ -142,9 +138,7 @@
         .back-button:hover {
             background-color: #c0392b;
         }
-
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
 
@@ -154,17 +148,17 @@
 
         <!-- Admin Button -->
         <button class="role-button admin" onclick="navigateToRole('admin')">
-            <i class="fas fa-user-shield"></i> Admin
+            Admin
         </button>
 
         <!-- Employee Button -->
         <button class="role-button employee" onclick="navigateToRole('employee')">
-            <i class="fas fa-briefcase"></i> Employee
+            Employee
         </button>
 
         <!-- Voter Button -->
         <button class="role-button voter" onclick="navigateToRole('voter')">
-            <i class="fas fa-user-check"></i> Voter
+            Voter
         </button>
     </div>
 
@@ -185,19 +179,16 @@
     </div>
 
     <script>
-        // Stop background color change when logged in
-        let backgroundInterval;
-
         // Navigate to the login form for the selected role
         function navigateToRole(role) {
             const roleColors = {
-                admin: 'linear-gradient(to right, #1c92d2, #f2fcfe)', // Admin color
-                employee: 'linear-gradient(to right, #56ab2f, #a8e063)', // Employee color
-                voter: 'linear-gradient(to right, #8e44ad, #c0392b)' // Voter color
+                admin: '#1c92d2', // Admin color
+                employee: '#56ab2f', // Employee color
+                voter: '#8e44ad' // Voter color
             };
 
             // Set background based on selected role
-            document.body.style.background = roleColors[role] || 'linear-gradient(to right, #6a11cb, #2575fc)';
+            document.body.style.backgroundColor = roleColors[role] || '#6a11cb';
 
             // Update the role header and welcome message
             document.getElementById('role-header').innerText = `${capitalizeFirstLetter(role)} Login`;
@@ -206,44 +197,21 @@
             // Hide the role selection and show login form
             document.getElementById('role-selection').classList.add('hidden');
             document.getElementById('login-form').classList.remove('hidden');
-
-            // Stop background color change
-            clearInterval(backgroundInterval);
         }
 
         // Go back to the role selection page
         function goBackToRoleSelection() {
             // Reset to default background
-            document.body.style.background = 'linear-gradient(to right, #6a11cb, #2575fc)';
+            document.body.style.backgroundColor = '#6a11cb';
 
             // Hide login form and show role selection page
             document.getElementById('role-selection').classList.remove('hidden');
             document.getElementById('login-form').classList.add('hidden');
-
-            // Start background color change
-            startBackgroundChange();
         }
 
         // Capitalize the first letter of a string
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        // Start background color change every 5 seconds
-        function startBackgroundChange() {
-            const backgrounds = [
-                'linear-gradient(to right, #6a11cb, #2575fc)',
-                'linear-gradient(to right, #1c92d2, #f2fcfe)',
-                'linear-gradient(to right, #56ab2f, #a8e063)',
-                'linear-gradient(to right, #8e44ad, #c0392b)'
-            ];
-
-            let currentBackgroundIndex = 0;
-
-            backgroundInterval = setInterval(() => {
-                currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
-                document.body.style.background = backgrounds[currentBackgroundIndex];
-            }, 5000);
         }
 
         // Handle form submission
@@ -256,12 +224,9 @@
             } else if (role === 'employee') {
                 window.location.href = 'Employee.html';
             } else if (role === 'voter') {
-                window.location.href = 'Voter.html';
+                window.location.href = 'voter_dashboard.html';
             }
         });
-
-        // Start the background change when the page loads
-        startBackgroundChange();
     </script>
 </body>
 </html>

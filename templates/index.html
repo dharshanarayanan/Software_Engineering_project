@@ -12,183 +12,98 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden;
-            position: relative;
             text-align: center;
+            position: relative;
         }
 
         /* Header */
-        header {
-            animation: fadeInDown 1s ease;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        header img {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 30px;
-            animation: bounce 2s infinite;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            font-size: 4.5rem;
+        h1 {
+            font-size: 4rem;
             font-weight: bold;
             color: #fff;
             text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-            animation: fadeInUp 2s ease;
+            margin-bottom: 20px;
         }
 
         /* Call-to-Action */
         .cta-container {
-            margin-top: 20px;
-            animation: fadeIn 2s ease;
+            margin-top: 30px;
         }
 
         .cta-button {
-            padding: 18px 30px;
+            padding: 18px 40px;
             font-size: 1.6rem;
             font-weight: bold;
-            background: linear-gradient(to right, #43e97b, #38f9d7);
+            background: #ff416c;
             border: none;
             border-radius: 50px;
             color: #fff;
             cursor: pointer;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 65, 108, 0.6);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .cta-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 25px rgba(255, 65, 108, 1);
         }
 
         .cta-button a {
             color: inherit;
             text-decoration: none;
-            font-weight: bold;
             text-transform: uppercase;
         }
 
-        /* Floating Circles */
-        .circle {
+        /* Background Decoration */
+        .glow {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            animation: float 12s infinite, move 25s infinite;
-        }
-        .circle:nth-child(1) {
-            width: 250px;
-            height: 250px;
-            top: 5%;
-            left: 15%;
-            animation-delay: 0s;
-        }
-        .circle:nth-child(2) {
             width: 200px;
             height: 200px;
-            bottom: 10%;
-            right: 10%;
-            animation-delay: 2s;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50%;
+            filter: blur(50px);
         }
-        .circle:nth-child(3) {
-            width: 300px;
-            height: 300px;
-            top: 70%;
-            left: 60%;
-            animation-delay: 4s;
-        }
-        .circle:nth-child(4) {
-            width: 150px;
-            height: 150px;
-            top: 30%;
-            right: 25%;
-            animation-delay: 6s;
-        }
+        .glow:nth-child(1) { top: 10%; left: 20%; }
+        .glow:nth-child(2) { bottom: 15%; right: 25%; }
 
         /* Footer */
         footer {
-            margin-top: 50px;
+            margin-top: 40px;
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            animation: fadeInUp 2.5s ease;
         }
 
         footer span {
-            color: #43e97b;
+            color: #ff416c;
             font-weight: bold;
-        }
-
-        /* Animations */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-25px); }
-            100% { transform: translateY(0); }
-        }
-
-        @keyframes move {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(20px); }
-            100% { transform: translateX(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-
-    <!-- Floating Circles -->
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
+    <!-- Background Glows -->
+    <div class="glow"></div>
+    <div class="glow"></div>
 
     <!-- Main Content -->
-    <header>
-        <img src="logo.png" alt="Logo">
-        <h1>Welcome Portal</h1>
-    </header>
-    <p style="font-size: 1.6rem; margin-bottom: 40px;">Your seamless access to our platform begins here:</p>
+    <h1>Welcome to the Portal</h1>
+    <p style="font-size: 1.6rem;">Your journey begins here:</p>
 
     <div class="cta-container">
         <button class="cta-button">
-            <a href="/login">Enter Now</a>
+            <a href="login.html">Enter Now</a>
         </button>
     </div>
 
     <!-- Footer -->
     <footer>
-        &copy; 2024 <span>Welcome Portal</span> | All rights reserved
+        &copy; 2025 <span>Welcome Portal</span> | All rights reserved
     </footer>
 </body>
 </html>

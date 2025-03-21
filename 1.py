@@ -1,17 +1,8 @@
-from pymongo import MongoClient
-from pymongo.ssl_support import SSLContextOptions
-
-import logging
-logging.basicConfig(level=logging.DEBUG)
-
+import pymongo
 from pymongo import MongoClient
 
-uri = "mongodb+srv://dharshan:whatsmyname@cluster0.hh0vx.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://dharshan:saymyname@cluster0.hh0vx.mongodb.net/voting_system?retryWrites=true&w=majority&authSource=admin&tls=true"
 
 client = MongoClient(uri)
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print("Error:", e)
-
+client.admin.command('ping')
+print("✅ Connected!")

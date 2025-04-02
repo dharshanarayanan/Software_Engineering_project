@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Analytics Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .sidebar-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .sidebar-header p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #d1e3e8;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #d1e3e8;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Collapsible Profile */
+        .sidebar-header.collapsed + .sidebar-content {
+            display: none;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            flex-grow: 1;
+            padding: 20px 30px;
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2rem;
+        }
+
+        .dark-mode-btn {
+            background: #ff3d81;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-btn:hover {
+            background-color: #e60073;
+        }
+
+        /* Card Container */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Chart Section */
+        .chart-section {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .chart-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-box canvas {
+            width: 100%;
+            height: 300px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header" onclick="toggleProfile()">
+            <img src="profile-pic.jpg" alt="Admin Profile Picture">
+            <div>
+                <h3>Admin Name</h3>
+                <p>admin@example.com</p>
+            </div>
+        </div>
+        <div class="sidebar-content">
+            <a href="#overview">Overview</a>
+            <a href="#voting-data">Voting Data</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#notifications">Notifications</a>
+            <a href="#settings">Settings</a>
+        </div>
+    </div>
+
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Voter Analytics</h1>
+            <button class="dark-mode-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <h3>Total Voters</h3>
+                <p>12,450</p>
+            </div>
+            <div class="card">
+                <h3>Votes Cast</h3>
+                <p>8,230</p>
+            </div>
+            <div class="card">
+                <h3>Turnout Rate</h3>
+                <p>66%</p>
+            </div>
+            <div class="card">
+                <h3>Regions Covered</h3>
+                <p>35</p>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart-box">
+                <h3>Votes Over Time</h3>
+                <canvas id="votesOverTime"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Age Demographics</h3>
+                <canvas id="ageDemographics"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Gender Distribution</h3>
+                <canvas id="genderDistribution"></canvas>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Voter Analytics Dashboard. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function toggleProfile() {
+            const header = document.querySelector('.sidebar-header');
+            header.classList.toggle('collapsed');
+        }
+
+        // Chart.js initialization
+        const votesOverTimeCtx = document.getElementById('votesOverTime').getContext('2d');
+        const ageDemographicsCtx = document.getElementById('ageDemographics').getContext('2d');
+        const genderDistributionCtx = document.getElementById('genderDistribution').getContext('2d');
+
+        new Chart(votesOverTimeCtx, {
+            type: 'line',
+            data: {
+                labels: ['8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM'],
+                datasets: [{
+                    label: 'Votes Over Time',
+                    data: [80, 100, 120, 150, 180, 210, 250, 300, 350, 400, 450],
+                    borderColor: '#6a11cb',
+                    fill: false,
+                }],
+            },
+        });
+
+        new Chart(ageDemographicsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['18-25', '26-35', '36-45', '46-60', '60+'],
+                datasets: [{
+                    label: 'Age Demographics',
+                    data: [1500, 2300, 2000, 1800, 700],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#ffa600'],
+                }],
+            },
+        });
+
+        new Chart(genderDistributionCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Male', 'Female', 'Other'],
+                datasets: [{
+                    data: [50, 45, 5],
+                    backgroundColor: ['#36a2eb', '#ff6384', '#cc65fe'],
+                }],
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint Scanner Voting</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #87CEEB, #00BFFF); /* Sky blue gradient background */
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: fadeIn 2s ease-in-out;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2575fc;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Fingerprint Scanner Animation */
+        .fingerprint-scanner-animation {
+            display: none;
+            background: url('https://via.placeholder.com/250') center no-repeat;
+            background-size: 100px 100px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .fingerprint-text {
+            font-size: 1.3rem;
+            color: #333;
+            margin-top: 20px;
+            animation: fadeInText 2s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 191, 255, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(0, 191, 255, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 191, 255, 0.5); }
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #1E90FF;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            background-color: #4682B4;
+            transform: scale(1);
+        }
+
+        /* User Details Section */
+        .user-details {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .user-info-card {
+            background: #f7f9fc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: #333;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .user-info-card:hover {
+            transform: scale(1.05);
+        }
+
+        .user-info-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+        }
+
+        .user-info-card p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        .user-info-card p strong {
+            font-weight: bold;
+            color: #2575fc;
+        }
+
+        /* Party Options */
+        .party-options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .party-option {
+            background: #2575fc;
+            color: white;
+            padding: 15px;
+            font-size: 1.4rem;
+            border-radius: 25px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .party-option:hover {
+            background-color: #1E90FF;
+            transform: scale(1.05);
+        }
+
+        .party-option:active {
+            background-color: #4682B4;
+            transform: scale(1);
+        }
+
+        .vote-success {
+            display: none;
+            font-size: 1.5rem;
+            color: #32CD32;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Loader */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2575fc;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Fingerprint Scanner Voting</h1>
+        <p>Please verify your identity to proceed with voting.</p>
+        
+        <!-- Fingerprint Scanner Animation -->
+        <div class="fingerprint-scanner-animation" id="fingerprintScanner"></div>
+        <p class="fingerprint-text" id="fingerprintText">Scanning... Please place your finger on the scanner.</p>
+
+        <!-- User Details Section -->
+        <div class="user-details" id="userDetails">
+            <h2>Your Personal Details</h2>
+            <p>Here are your details. Kindly verify them to proceed.</p>
+            <div class="user-info-card">
+                <div style="display: flex; align-items: center;">
+                    <img src="https://via.placeholder.com/100" alt="User Photo">
+                    <div>
+                        <p><strong>Name:</strong> John Doe</p>
+                        <p><strong>ID No:</strong> 123456789</p>
+                        <p><strong>Phone:</strong> 9876543210</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" id="proceedToVoteBtn" onclick="showPartyOptions()">Proceed to Vote</button>
+        </div>
+
+        <!-- Party Options -->
+        <div class="party-options" id="partyOptions">
+            <h3>Select Party to Vote</h3>
+            <div class="party-option" onclick="vote('Party A')">Party A</div>
+            <div class="party-option" onclick="vote('Party B')">Party B</div>
+            <div class="party-option" onclick="vote('Party C')">Party C</div>
+            <div class="party-option" onclick="vote('Party D')">Party D</div>
+        </div>
+
+        <!-- Vote Success -->
+        <div class="vote-success" id="voteSuccess">
+            <p>Successfully Voted!</p>
+            <button class="btn" onclick="redirectToVoterPage()">Exit</button>
+        </div>
+    </div>
+
+    <script>
+        // Show Fingerprint Scanning Animation when page loads
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('fingerprintScanner').style.display = 'block';
+                document.getElementById('fingerprintText').style.display = 'block';
+            }, 500); // Animation delay before starting scanning
+
+            // Simulate fingerprint scanning completion after 5 seconds (more realistic delay)
+            setTimeout(function() {
+                document.getElementById('fingerprintScanner').style.display = 'none';
+                document.getElementById('fingerprintText').style.display = 'none';
+                document.getElementById('userDetails').style.display = 'block';
+                document.getElementById('proceedToVoteBtn').style.display = 'block';
+            }, 5000); // 5 seconds for fingerprint scanning to simulate accuracy
+        }
+
+        // Proceed to Party Selection
+        function showPartyOptions() {
+            document.getElementById('userDetails').style.display = 'none';
+            document.getElementById('partyOptions').style.display = 'block';
+        }
+
+        // Voting Logic
+        let voteCount = {
+            'Party A': 0,
+            'Party B': 0,
+            'Party C': 0,
+            'Party D': 0
+        };
+
+        function vote(party) {
+            voteCount[party]++;
+            document.getElementById('partyOptions').style.display = 'none';
+            document.getElementById('voteSuccess').style.display = 'block';
+        }
+
+        // Redirect to Voter page after voting with delay
+        function redirectToVoterPage() {
+            window.location.href = 'Voter.html';
+        }
+    </script>
+
+</body>
+</html>

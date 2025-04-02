@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Portal</title>
+    <title>Role-Based Login</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -11,36 +11,77 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: #fff;
+            background-color: rgba(0, 0, 50, 0.5); /* Dark blue background with transparency */
+            backdrop-filter: blur(12px); /* Apply blur effect */
             overflow: hidden;
             position: relative;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
             width: 350px;
-            animation: fadeIn 1s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 10;
         }
 
         header {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
         }
 
-        p {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            opacity: 0.8;
+        .role-button {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .role-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .role-button.admin {
+            background: linear-gradient(to right, #1c92d2, #f2fcfe); /* Admin color */
+        }
+
+        .role-button.employee {
+            background: linear-gradient(to right, #56ab2f, #a8e063); /* Employee color */
+        }
+
+        .role-button.voter {
+            background: linear-gradient(to right, #8e44ad, #c0392b); /* Voter color */
+        }
+
+        .hidden {
+            display: none;
         }
 
         label {
@@ -48,124 +89,84 @@
             font-size: 1rem;
             margin-bottom: 5px;
             text-align: left;
+            color: #fff;
+            font-weight: 500;
         }
 
         input {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             margin-bottom: 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             font-size: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         input:focus {
+            background: rgba(255, 255, 255, 0.3);
             outline: none;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+            transform: scale(1.02);
         }
 
-        button {
+        button[type="submit"], .back-button {
+            padding: 15px;
             width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background-color: #ff7e5f;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            margin-bottom: 10px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        button:hover {
-            transform: scale(1.05);
+        button[type="submit"]:hover, .back-button:hover {
+            background-color: #feb47b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .back-button {
-            background: linear-gradient(to right, #43cea2, #185a9d);
-        }
-
-        footer {
+            background-color: #8e44ad;
             margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.8;
         }
 
-        footer span {
-            color: #ff7e5f;
-            font-weight: 700;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Background animation */
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            animation: move 15s infinite;
-        }
-
-        .circle:nth-child(1) {
-            width: 200px;
-            height: 200px;
-            top: 10%;
-            left: 20%;
-        }
-
-        .circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            bottom: 15%;
-            right: 10%;
-        }
-
-        .circle:nth-child(3) {
-            width: 300px;
-            height: 300px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes move {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-30px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+        .back-button:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
 <body>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
 
-    <div class="container">
-        <header>Login</header>
-        <p>Welcome back! Please login to continue.</p>
+    <!-- Role selection page -->
+    <div id="role-selection" class="container">
+        <header>Select Your Role</header>
 
-        <form>
+        <!-- Admin Button -->
+        <button class="role-button admin" onclick="navigateToRole('admin')">
+            Admin
+        </button>
+
+        <!-- Employee Button -->
+        <button class="role-button employee" onclick="navigateToRole('employee')">
+            Employee
+        </button>
+
+        <!-- Voter Button -->
+        <button class="role-button voter" onclick="navigateToRole('voter')">
+            Voter
+        </button>
+    </div>
+
+    <!-- Login form page -->
+    <div id="login-form" class="container hidden">
+        <header id="role-header">Login</header>
+        <p id="welcome-message"></p>
+        <form id="login-form-content">
             <label for="username">Username</label>
             <input type="text" id="username" placeholder="Enter your username" required>
 
@@ -174,10 +175,60 @@
 
             <button type="submit">Login</button>
         </form>
+        <button class="back-button" onclick="goBackToRoleSelection()">Back to Role Selection</button>
+        <button class="back-button" onclick="window.location.href='/register'">If you haven't registered</button>
 
-        <button class="back-button" onclick="history.back()">Back to Home</button>
-
-        <footer>&copy; 2024 <span>Login Portal</span>. All rights reserved.</footer>
     </div>
+
+    <script>
+        // Navigate to the login form for the selected role
+        function navigateToRole(role) {
+            const roleColors = {
+                admin: '#1c92d2', // Admin color
+                employee: '#56ab2f', // Employee color
+                voter: '#8e44ad' // Voter color
+            };
+
+            // Set background based on selected role
+            document.body.style.backgroundColor = roleColors[role] || '#6a11cb';
+
+            // Update the role header and welcome message
+            document.getElementById('role-header').innerText = `${capitalizeFirstLetter(role)} Login`;
+            document.getElementById('welcome-message').innerText = `Welcome, ${capitalizeFirstLetter(role)}! Please log in to continue.`;
+
+            // Hide the role selection and show login form
+            document.getElementById('role-selection').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+        }
+
+        // Go back to the role selection page
+        function goBackToRoleSelection() {
+            // Reset to default background
+            document.body.style.backgroundColor = '#6a11cb';
+
+            // Hide login form and show role selection page
+            document.getElementById('role-selection').classList.remove('hidden');
+            document.getElementById('login-form').classList.add('hidden');
+        }
+
+        // Capitalize the first letter of a string
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Handle form submission
+        document.getElementById('login-form-content').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const role = document.getElementById('role-header').innerText.split(' ')[0].toLowerCase();
+
+            if (role === 'admin') {
+                window.location.href = 'dashboard.html';
+            } else if (role === 'employee') {
+                window.location.href = 'Employee.html';
+            } else if (role === 'voter') {
+                window.location.href = 'voter_dashboard.html';
+            }
+        });
+    </script>
 </body>
 </html>

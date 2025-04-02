@@ -6,218 +6,109 @@
     <title>Welcome Portal</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: #333;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden;
+            text-align: center;
             position: relative;
         }
-        header {
-            text-align: center;
+
+        /* Header */
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
         }
-        header img {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 15px;
-            animation: bounce 2s infinite;
+
+        /* Call-to-Action */
+        .cta-container {
+            margin-top: 30px;
         }
-        header h1 {
-            font-size: 3.5rem;
+
+        .cta-button {
+            padding: 18px 40px;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: #fff;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-        p {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 30px;
-            text-align: center;
-            animation: fadeInUp 1.5s ease;
-        }
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            animation: fadeIn 2s ease;
-        }
-        label {
-            font-size: 1.3rem;
-            color: #fff;
-        }
-        select {
-            padding: 12px 25px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #000;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: #ff416c;
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            color: #fff;
             cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 65, 108, 0.6);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        select:hover {
+
+        .cta-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 25px rgba(255, 65, 108, 1);
         }
-        .login-button {
-            margin-top: 20px;
-        }
-        .login-button button {
-            padding: 10px 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            background: linear-gradient(to right, #0e9e01, #0bb201);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            outline: none;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .login-button button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
-        .login-button button a {
+
+        .cta-button a {
             color: inherit;
             text-decoration: none;
-            font-weight: bold;
             text-transform: uppercase;
         }
-        footer {
-            margin-top: 50px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            animation: fadeInUp 2.5s ease;
-        }
-        footer span {
-            color: #ff7e5f;
-            font-weight: bold;
-        }
-        /* Decorative floating elements */
-        .circle {
+
+        /* Background Decoration */
+        .glow {
             position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 10s infinite, move 20s infinite;
+            filter: blur(50px);
         }
-        .circle:nth-child(1) {
-            width: 180px;
-            height: 180px;
-            top: 8%;
-            left: 10%;
-            animation-delay: 0s;
+        .glow:nth-child(1) { top: 10%; left: 20%; }
+        .glow:nth-child(2) { bottom: 15%; right: 25%; }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
         }
-        .circle:nth-child(2) {
-            width: 130px;
-            height: 130px;
-            bottom: 10%;
-            right: 8%;
-            animation-delay: 2s;
-        }
-        .circle:nth-child(3) {
-            width: 220px;
-            height: 220px;
-            top: 65%;
-            left: 55%;
-            animation-delay: 4s;
-        }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-        @keyframes move {
-            0% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(15px);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        footer span {
+            color: #ff416c;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <header>
-        <img src="logo.png" alt="Logo">
-        <h1>Welcome Portal</h1>
-    </header>
-    <p>Access your designated role easily and securely:</p>
-    <main>
-        <label for="role-options">Choose Your Role:</label>
-        <select id="role-options">
-            <option value="admin">Admin</option>
-            <option value="employee">Employee</option>
-            <option value="voter">Voter</option>
-        </select>
-        <div class="login-button">
-            <button>
-                <a href="/login">Go to Login</a>
-            </button>
-        </div>        
-    </main>
-    <footer>&copy; 2024 <span>Welcome Portal</span> | All rights reserved</footer>
+    <!-- Background Glows -->
+    <div class="glow"></div>
+    <div class="glow"></div>
+
+    <!-- Main Content -->
+    <h1>Welcome to the Portal</h1>
+    <p style="font-size: 1.6rem;">Your journey begins here:</p>
+
+    <div class="cta-container">
+        <button class="cta-button">
+<<<<<<< HEAD
+            <a href="login.html">Enter Now</a>
+=======
+            <a href="{{ url_for('login') }}">Enter Now</a>
+>>>>>>> 4e1244dcf1638afa2fb67fa3cafba94b625b59a7
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 <span>Welcome Portal</span> | All rights reserved
+    </footer>
+    
 </body>
 </html>
